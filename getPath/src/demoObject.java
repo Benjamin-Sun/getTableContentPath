@@ -1,22 +1,22 @@
 public class demoObject {
 
-    private int id;
-    private int pid;
+    private Integer id;
+    private Integer pid;
     private String content;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
@@ -28,7 +28,7 @@ public class demoObject {
         this.content = content;
     }
 
-    public demoObject(int id, int pid, String content) {
+    public demoObject(Integer id, Integer pid, String content) {
         this.id = id;
         this.pid = pid;
         this.content = content;
