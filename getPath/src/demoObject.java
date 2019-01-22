@@ -1,8 +1,11 @@
+import java.util.List;
+
 public class demoObject {
 
     private Integer id;
     private Integer pid;
     private String content;
+    private List<demoObject> children = null;
 
     public Integer getId() {
         return id;
@@ -28,10 +31,19 @@ public class demoObject {
         this.content = content;
     }
 
-    public demoObject(Integer id, Integer pid, String content) {
+    public List<demoObject> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<demoObject> children) {
+        this.children = children;
+    }
+
+    public demoObject(Integer id, Integer pid, String content, List<demoObject> children) {
         this.id = id;
         this.pid = pid;
         this.content = content;
+        this.children = children;
     }
 
     public demoObject() {
@@ -43,6 +55,7 @@ public class demoObject {
                 "id=" + id +
                 ", pid=" + pid +
                 ", content='" + content + '\'' +
+                ", children=" + children +
                 '}';
     }
 }
