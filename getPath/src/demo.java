@@ -14,18 +14,38 @@ public class demo {
         demoObject d4 = new demoObject(7, 4, "4", childrenlist2);
         List<demoObject> childrenlist4 = Arrays.asList(d4);
         demoObject d3 = new demoObject(4, 3, "3", childrenlist4);
-        List<demoObject> childrenlist3 = Arrays.asList(d5, d3);
+        demoObject d7 = new demoObject(5, 3, "5", null);
+        List<demoObject> childrenlist3 = Arrays.asList(d5, d3, d7);
         demoObject d2 = new demoObject(3, 1, "2", childrenlist3);
         List<demoObject> childrenlist = Arrays.asList(d2);
         demoObject d1 = new demoObject(1, -1, "1", childrenlist);
 
         System.out.println(d1);
 
-        System.out.println(getPath(d1, 7));
+        System.out.println(getPath(d1, 20));
     }
 
     public static String getPath(demoObject demoObject, Integer id){
-        Stack<demoObject> stack = new Stack<demoObject>();
+//        Stack<demoObject> stack = new Stack<demoObject>();
+//        demoObject do1 = new demoObject();
+//        String path = "/";
+//        stack.add(demoObject);
+//        while(!stack.isEmpty()){
+//            do1 = stack.pop();
+////            System.out.println(do1);
+//            path += do1.getId() + "/";
+//            if (do1.getId() == id){
+//                return path;
+//            }
+//            List<demoObject> childrenlist = do1.getChildren();
+//            if (childrenlist != null && !childrenlist.isEmpty()){
+//                for (demoObject do2 : childrenlist){
+//                    stack.push(do2);
+//                }
+//            }
+//        }
+
+        Stack<demoObject> stack = new Stack<>();
         demoObject do1 = new demoObject();
         String path = "/";
         stack.add(demoObject);
@@ -33,14 +53,25 @@ public class demo {
             do1 = stack.pop();
 //            System.out.println(do1);
             path += do1.getId() + "/";
-            if (do1.getId() == id){
-                return path;
-            }
+
+            Stack<Integer> tmpstack = new Stack<>();
+            tmpstack.push(do1.getId());
+            System.out.println(tmpstack.toString());
+
+//            if (do1.getId() == id){
+//                return path;
+//            }
+
             List<demoObject> childrenlist = do1.getChildren();
             if (childrenlist != null && !childrenlist.isEmpty()){
                 for (demoObject do2 : childrenlist){
                     stack.push(do2);
                 }
+            } else if (do1.getId() == id){
+//                System.out.println(tmpstack);
+                return tmpstack.toString();
+            } else {
+                tmpstack.pop();
             }
         }
         return "no selected id";
