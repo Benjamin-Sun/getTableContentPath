@@ -1,5 +1,3 @@
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,25 +27,38 @@ public class demo {
         System.out.println(getPath(d1, 20));
     }
 
-    public static String getPath(demoObject demoObject, Integer id){
-//        Stack<demoObject> stack = new Stack<demoObject>();
-//        demoObject do1 = new demoObject();
+    public static List<List<Integer>> getPath(demoObject demoObject, Integer id){
+
+        Stack<demoObject> stack = new Stack<demoObject>();
+        demoObject do1 = new demoObject();
 //        String path = "/";
-//        stack.add(demoObject);
-//        while(!stack.isEmpty()){
-//            do1 = stack.pop();
-////            System.out.println(do1);
-//            path += do1.getId() + "/";
-//            if (do1.getId() == id){
-//                return path;
-//            }
-//            List<demoObject> childrenlist = do1.getChildren();
-//            if (childrenlist != null && !childrenlist.isEmpty()){
-//                for (demoObject do2 : childrenlist){
-//                    stack.push(do2);
-//                }
-//            }
-//        }
+        stack.push(demoObject);
+        Stack<demoObject> tmpstack = new Stack<>();
+        List<Integer> path = new ArrayList<>();
+        List<List<Integer>> pathlist = new ArrayList<>();
+
+        while(!stack.isEmpty() || stack == null){
+            do1 = stack.pop();
+            List<demoObject> childrenlist = do1.getChildren();
+            if (childrenlist != null && !childrenlist.isEmpty()){
+                do1.setIstraverse(1);
+                for (demoObject do2 : childrenlist){
+                    stack.push(do2);
+                }
+            }
+            if (do1.getIstraverse() == 1){
+                tmpstack.push(do1);
+            }
+            if (childrenlist == null || childrenlist.isEmpty()){
+                do1.setIstraverse(0);
+                for (demoObject tmpdo : tmpstack){
+                    path.add(tmpdo.getId());
+                    tmpstack.pop();
+                }
+                pathlist.add(path);
+            }
+        }
+        return pathlist;
 
 //        Stack<demoObject> stack = new Stack<>();
 //        demoObject do1 = new demoObject();
@@ -74,43 +85,43 @@ public class demo {
 //            }
 //        }
 
-        Stack<demoObject> stack = new Stack<>();
-        demoObject do1 = new demoObject();
-        String path = "/";
-        stack.add(demoObject);
-        Stack<Integer> tmpidstack = new Stack<>();
-        List<Stack> pathlist = new ArrayList<>();
-        Stack<demoObject> tmpobjstack = new Stack<>();
-        while(!stack.isEmpty()){
-            while (demoObject.getChildren() != null){
-
-            }
-            do1 = stack.pop();
-//            System.out.println(do1);
-//            path += do1.getId() + "/";
-
-            tmpidstack.push(do1.getId());
-//            System.out.print(tmpstack.toString());
-
-            List<demoObject> childrenlist = do1.getChildren();
-            if (childrenlist != null && !childrenlist.isEmpty()){
-                for (int i = 0; i < childrenlist.size(); i++){
-                    stack.push(childrenlist.get(i));
-                }
-            } else {
-//                stack.pop();
-                pathlist.add(tmpidstack);
-                System.out.println(pathlist);
-                System.out.println(tmpidstack);
-                System.out.println(stack.pop());
-//                tmpidstack.clear();
-//                break;
-//                tmpidstack.removeAllElements();
-//                return tmpidstack.toString();
-            }
-        }
+//        Stack<demoObject> stack = new Stack<>();
+//        demoObject do1 = new demoObject();
+//        String path = "/";
+//        stack.add(demoObject);
+//        Stack<Integer> tmpidstack = new Stack<>();
+//        List<Stack> pathlist = new ArrayList<>();
+//        Stack<demoObject> tmpobjstack = new Stack<>();
+//        while(!stack.isEmpty()){
+//            while (demoObject.getChildren() != null){
+//
+//            }
+//            do1 = stack.pop();
+////            System.out.println(do1);
+////            path += do1.getId() + "/";
+//
+//            tmpidstack.push(do1.getId());
+////            System.out.print(tmpstack.toString());
+//
+//            List<demoObject> childrenlist = do1.getChildren();
+//            if (childrenlist != null && !childrenlist.isEmpty()){
+//                for (int i = 0; i < childrenlist.size(); i++){
+//                    stack.push(childrenlist.get(i));
+//                }
+//            } else {
+////                stack.pop();
+//                pathlist.add(tmpidstack);
+//                System.out.println(pathlist);
+//                System.out.println(tmpidstack);
+//                System.out.println(stack.pop());
+////                tmpidstack.clear();
+////                break;
+////                tmpidstack.removeAllElements();
+////                return tmpidstack.toString();
+//            }
+//        }
 
 //        return "no selected id";
-        return pathlist.toString();
+//        return pathlist.toString();
     }
 }

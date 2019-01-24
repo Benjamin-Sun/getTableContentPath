@@ -6,6 +6,7 @@ public class demoObject {
     private Integer pid;
     private String content;
     private List<demoObject> children = null;
+    private Integer istraverse = -1;
 
     public Integer getId() {
         return id;
@@ -39,6 +40,14 @@ public class demoObject {
         this.children = children;
     }
 
+    public Integer getIstraverse() {
+        return istraverse;
+    }
+
+    public void setIstraverse(Integer istraverse) {
+        this.istraverse = istraverse;
+    }
+
     public demoObject(Integer id, Integer pid, String content, List<demoObject> children) {
         this.id = id;
         this.pid = pid;
@@ -56,6 +65,7 @@ public class demoObject {
                 ", pid=" + pid +
                 ", content='" + content + '\'' +
                 ", children=" + children +
+                ", istraverse=" + istraverse +
                 '}';
     }
 }
